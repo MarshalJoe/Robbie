@@ -1,0 +1,14 @@
+{
+  "name": "RealtorBot3000",
+  "version": "1.0.0",
+  "description": "A Twitter bot for reposting member-submitted listings",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Joe Marshall",
+  "license": "MIT",
+  "dependencies": {
+    "node-twitterbot": "^0.2.2"
+  }
+}
