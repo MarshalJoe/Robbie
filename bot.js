@@ -2,9 +2,16 @@ var Twit = require('twit');
 
 var RealtorBot = new Twit(require('./config.js'));
 
+function postUpdate () {
+	var time = Date.now().toString();
+	var content = "Test message sent at " + time;
+	RealtorBot.post('statuses/update', { status: content }, function(err, data, response) {
+  		console.log('Message "' + data.text + '" sent at ' + time);
+	});
+}
 
-//  Tweet 'hello world!'
+// Tweet at program launch
+postUpdate();
 
-RealtorBot.post('statuses/update', { status: 'hello world, again!' }, function(err, data, response) {
-  console.log(data)
-});
+// Post the time every five minutes
+setInterval(postUpdate, 1000 * 60 * 5);
