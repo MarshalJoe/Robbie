@@ -1,8 +1,19 @@
 var Twit = require('twit');
-
+var twilioKeys = require('./twilioConfig.js');
 var data = require('./pullFeed.js');
 
-data.sayHello();
+
+//require the Twilio module and create a REST client
+// var client = require('twilio')(twilioKeys.account_SID, twilioKeys.auth_token);
+
+//Send an SMS text message
+// client.messages.create({ 
+// 	to: "15127883680", 
+// 	from: "+15125808257", 
+// 	body: "Ahoy hoy!",   
+// }, function(err, message) { 
+// 	console.log(message.sid); 
+// });
 
 // var RealtorBot = new Twit(require('./config.js'));
 
