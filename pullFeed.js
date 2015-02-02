@@ -1,29 +1,23 @@
 module.exports = {
 	pullDaily: function () {
 		console.log("Pulling daily feed...");
-		// Create RETS client
-		var RETS = require('rets');
+		// Include RETS keys
 		var retsKeys = require('./retsConfig.js')
 
-		// Open RETS connection
-		var client = RETS.createConnection({
-		  host: retsKeys.host,
-		  path: retsKeys.path,
-		  user: retsKeys.user,
-		  pass: retsKeys.pass
-		});
+		// Create RETS client
+    	var client = require('rets-client').getClient(retsKeys.loginURL, retsKeys.user, retsKeys.pass);
 
-		// Trigger on successful connection. 
-		client.once( 'connection.success', function connected( client ) {
-		  console.log( 'Connected to RETS as %s.', client.get( 'provider.name' ) )
-		 
-		});
+    	// Connection success event
+    	client.once('connection.success', function() {
+        	console.log("RETS Server connection success!");
+        	console.log("RETS version: " + client.retsVersion);
+        	
+    	});
 
-		// Return an error on successful connection
-		client.once( 'connection.error', function connection_error( error, client ) {
-		  console.error( 'Connection failed: %s.', error.message );
-		});
-
+	    // Connection failure event
+	    client.once('connection.failure', function(error) {
+	        console.log("connection to RETS server failed ~ %s", error);
+	    });
 
 
 	},

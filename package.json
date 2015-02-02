@@ -12,6 +12,7 @@
   "dependencies": {
     "forever": "^0.13.0",
     "rets": "0.0.1",
+    "rets-client": "^1.1.5",
     "twilio": "^1.10.0",
     "twit": "^1.1.19"
   }
