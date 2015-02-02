@@ -1,7 +1,13 @@
+// Take care of major dependencies...
 var Twit = require('twit');
+
+// Include config information (seperated to prevent commiting API keys)
 var twilioKeys = require('./twilioConfig.js');
 var data = require('./pullFeed.js');
 
+data.pullDaily();
+
+// var RealtorBot = new Twit(require('./config.js'));
 
 //require the Twilio module and create a REST client
 // var client = require('twilio')(twilioKeys.account_SID, twilioKeys.auth_token);
@@ -15,7 +21,6 @@ var data = require('./pullFeed.js');
 // 	console.log(message.sid); 
 // });
 
-// var RealtorBot = new Twit(require('./config.js'));
 
 // function postUpdate() {
 // 	var time = Date.now().toString();
