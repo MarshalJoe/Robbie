@@ -47,8 +47,8 @@ client.once('connection.success', function() {
 
             console.log('$' + sum + ' in residential home transactions took place Feb 1-2.');
             console.log(dailyHomesSold + ' homes were sold Feb 1-2');
-            Twitter.postTweet('$' + sum + ' in residential home transactions took place Feb 1-2.');
-            Twitter.postTweet(dailyHomesSold + ' homes were sold Feb 1-2');
+            //Twitter.postTweet('$' + sum + ' in residential home transactions took place Feb 1-2.');
+            //Twitter.postTweet(dailyHomesSold + ' homes were sold Feb 1-2');
         });
             
     });
