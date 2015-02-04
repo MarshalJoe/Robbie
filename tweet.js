@@ -5,7 +5,7 @@ module.exports = {
 		var RealtorBot = new Twit(require('./config.js'));;
 
 		RealtorBot.post('statuses/update', { status: content }, function(err, data, response) {
-				console.log('Message sent: ' + data.text);
+			console.log('Message sent: ' + data.text);
 		});
 	}
 }
