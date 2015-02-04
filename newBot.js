@@ -37,7 +37,7 @@ client.once('connection.success', function() {
 
                 // for(var fieldItem = 0; fieldItem < fields.length; fieldItem++) {
                 //     var systemStr = fields[fieldItem].SystemName;
-                    var homePrice = parseInt(data[dataItem]["ListPrice"], 10);
+                    var homePrice = parseInt(data[dataItem]["CurrentPrice"], 10);
                     dailyHomesTotal.push(homePrice);
                 // }
             }
