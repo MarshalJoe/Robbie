@@ -71,11 +71,11 @@ module.exports = {
                         dailyHomesTotal.push(homePrice);
                     }
 
+                    // Calculate desired Metrics
                     var sum = dailyHomesTotal.reduce(function(a, b) { return a + b });
                     var dailyHomesSold = data.length;
 
-                    //console.log('$' + sum + ' in residential home sales took place today, ' + twitterDate + '.');
-                    //console.log(dailyHomesSold + ' residential homes were sold today, ' + twitterDate + '.');
+                    // Post to Twitter
                     Twitter.postTweet('$' + sum + ' in residential home sales took place today, ' + twitterDate + '.');
                     Twitter.postTweet(dailyHomesSold + ' residential homes were sold today, ' + twitterDate + '.');
                 });
@@ -95,11 +95,11 @@ module.exports = {
                         dailyHomesTotal.push(homePrice);
                     }
 
+                    // Calculate desired metrics
                     var sum = dailyHomesTotal.reduce(function(a, b) { return a + b });
                     var dailyHomesAdded = data.length;
 
-                    //console.log('$' + sum + ' in residential listings were added today, ' + twitterDate + '.');
-                    //console.log(dailyHomesAdded + ' homes were added today, ' + twitterDate + '.');
+                    // Post to Twitter
                     Twitter.postTweet('$' + sum + ' in residential listings were added today, ' + twitterDate + '.');
                     Twitter.postTweet(dailyHomesAdded + ' homes were added today, ' + twitterDate + '.');
                 });
