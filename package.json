@@ -5,7 +5,7 @@
   "description": "A Twitter bot for posting statistics from the ACTRIS MLS",
   "main": "index.js",
   "scripts": {
-    "start": "node newBot.js"
+    "start": "node start.js"
   },
   "author": "Joe Marshall",
   "license": "MIT",
