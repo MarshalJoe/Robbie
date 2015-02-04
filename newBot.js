@@ -74,10 +74,10 @@ module.exports = {
                     var sum = dailyHomesTotal.reduce(function(a, b) { return a + b });
                     var dailyHomesSold = data.length;
 
-                    console.log('$' + sum + ' in residential home sales took place today, ' + twitterDate + '.');
-                    console.log(dailyHomesSold + ' residential homes were sold today, ' + twitterDate + '.');
-                    //Twitter.postTweet('$' + sum + ' in residential home sales took place today, ' + twitterDate + '.');
-                    //Twitter.postTweet(dailyHomesSold + ' residential homes were sold today, ' + twitterDate + '.');
+                    //console.log('$' + sum + ' in residential home sales took place today, ' + twitterDate + '.');
+                    //console.log(dailyHomesSold + ' residential homes were sold today, ' + twitterDate + '.');
+                    Twitter.postTweet('$' + sum + ' in residential home sales took place today, ' + twitterDate + '.');
+                    Twitter.postTweet(dailyHomesSold + ' residential homes were sold today, ' + twitterDate + '.');
                 });
                 
                 // Pass resource, class, and DQML query, get all residential homes added to the MLS today
@@ -89,7 +89,7 @@ module.exports = {
                         return;
                     }
 
-                    // iterate through search results, print out the list prices and add 'em up. 
+                    // Iterate through search results, print out the list prices and add 'em up. 
                     for(var dataItem = 0; dataItem < data.length; dataItem++) {
                         var homePrice = parseInt(data[dataItem]["CurrentPrice"], 10);
                         dailyHomesTotal.push(homePrice);
@@ -98,10 +98,10 @@ module.exports = {
                     var sum = dailyHomesTotal.reduce(function(a, b) { return a + b });
                     var dailyHomesAdded = data.length;
 
-                    console.log('$' + sum + ' in residential listings were added today, ' + twitterDate + '.');
-                    console.log(dailyHomesAdded + ' homes were added today, ' + twitterDate + '.');
-                    //Twitter.postTweet('$' + sum + ' in residential listings were added today, ' + twitterDate + '.');
-                    //Twitter.postTweet(dailyHomesAdded + ' homes were added today, ' + twitterDate + '.');
+                    //console.log('$' + sum + ' in residential listings were added today, ' + twitterDate + '.');
+                    //console.log(dailyHomesAdded + ' homes were added today, ' + twitterDate + '.');
+                    Twitter.postTweet('$' + sum + ' in residential listings were added today, ' + twitterDate + '.');
+                    Twitter.postTweet(dailyHomesAdded + ' homes were added today, ' + twitterDate + '.');
                 });
 
 
