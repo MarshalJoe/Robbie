@@ -28,17 +28,19 @@ if (rawDay < 10) {
 }
 
 var retsDate = year + '-' + month + '-' + day
+console.log(retsDate);
 
 // ... and a Twitter-friendly one.
 var twitterDate = month + '/' + day + '/' + year;
+console.log(twitterDate);
 
 // On successful RETS connection...
 client.once('connection.success', function() {
-    console.log("Connected to RETS server");
-    console.log("RETS version: " + client.retsVersion);
+	console.log("Connected to RETS server");
+	console.log("RETS version: " + client.retsVersion);
 
 
-    // Get residential property fields 
+	// Get residential property fields 
     client.getTable("Property", "RESI");
     var fields;
 
@@ -54,7 +56,7 @@ client.once('connection.success', function() {
 
         // Pass resource, class, and DQML query, get all residential homes sold Feb 1-2
         client.query("Property", "RESI", soldQuery, function(error, data) {
-            var dailyHomesTotal = [];
+        	var dailyHomesTotal = [];
 
             if (error) {
                 console.log(error);
@@ -103,5 +105,5 @@ client.once('connection.success', function() {
 
     });
 
-// end of RETS connection   
+// end of RETS connection	
 });
