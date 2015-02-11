@@ -1,5 +1,6 @@
 var Bot = require("./newBot.js")
 var schedule = require('node-schedule');
+var util = require('util');
 
 // Create a rule so that the Bot posts every day at 5pm 
 var rule = new schedule.RecurrenceRule();
@@ -12,3 +13,6 @@ var j = schedule.scheduleJob(rule, function(){
     Bot.runBot();
 });
 
+// Check Memory Footprint
+console.log("Memory Usage");
+console.log(util.inspect(process.memoryUsage()));

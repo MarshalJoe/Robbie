@@ -9,38 +9,40 @@ module.exports = {
         // Create RETS client and connect
         var client = require('rets-client').getClient(retsKeys.loginURL, retsKeys.user, retsKeys.pass);
 
-        // Grab current date...
-        var rawDate = new Date;
-
-        // ... and parse into a RETS-friendly format...
-        var rawMonth = rawDate.getMonth() + 1;
-        var rawDay = rawDate.getDay() + 1;
-        var year = rawDate.getFullYear();
-
-        if (rawMonth < 10) {
-            var month = '0' + rawMonth;
-        } else {
-            var month = rawMonth;
-        }
-
-        if (rawDay < 10) {
-            var day = '0' + rawDay;
-        } else {
-            var day = rawDay;
-        }
-
-        var retsDate = year + '-' + month + '-' + day
-        console.log(retsDate);
-
-        // ... and a Twitter-friendly one.
-        var twitterDate = month + '/' + day + '/' + year;
-        console.log(twitterDate);
 
         // On successful RETS connection...
         client.once('connection.success', function() {
             console.log("Connected to RETS server");
             console.log("RETS version: " + client.retsVersion);
 
+            // Grab current date...
+            var rawDate = new Date;
+
+            // ... and parse into a RETS-friendly format...
+            var rawMonth = rawDate.getMonth() + 1
+            console.log("Raw month is " + rawMonth);
+            var rawDay = rawDate.getDate();
+            console.log("Raw date is " + rawDay);
+            var year = rawDate.getFullYear();
+            var month;
+            var day;
+
+            if (rawMonth < 10) {
+                month = '0' + rawMonth;
+            } else {
+                month = rawMonth;
+            }
+
+            if (rawDay < 10) {
+                day = '0' + rawDay;
+            } else {
+                day = rawDay;
+            }
+
+            var retsDate = year + '-' + month + '-' + day
+
+            // ... and a Twitter-friendly one.
+            var twitterDate = month + '/' + day + '/' + year;
 
             // Get residential property fields 
             client.getTable("Property", "RESI");
