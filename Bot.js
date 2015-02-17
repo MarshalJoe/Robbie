@@ -20,9 +20,7 @@ module.exports = {
 
             // ... and parse into a RETS-friendly format...
             var rawMonth = rawDate.getMonth() + 1
-            console.log("Raw month is " + rawMonth);
             var rawDay = rawDate.getDate();
-            console.log("Raw date is " + rawDay);
             var year = rawDate.getFullYear();
             var month;
             var day;
@@ -78,8 +76,8 @@ module.exports = {
                     var dailyHomesSold = data.length;
 
                     // Post to Twitter
-                    Twitter.postTweet('$' + sum + ' in residential home sales took place today, ' + twitterDate + '.');
-                    Twitter.postTweet(dailyHomesSold + ' residential homes were sold today, ' + twitterDate + '.');
+                    Twitter.postTweet('$' + sum + ' in residential home sales today, ' + twitterDate + '.');
+                    Twitter.postTweet(dailyHomesSold + ' residential homes sold today, ' + twitterDate + '.');
                 });
                 
                 // Pass resource, class, and DQML query, get all residential homes added to the MLS today
@@ -102,8 +100,8 @@ module.exports = {
                     var dailyHomesAdded = data.length;
 
                     // Post to Twitter
-                    Twitter.postTweet('$' + sum + ' in residential listings were added today, ' + twitterDate + '.');
-                    Twitter.postTweet(dailyHomesAdded + ' homes were added today, ' + twitterDate + '.');
+                    Twitter.postTweet('$' + sum + ' in residential listings added today, ' + twitterDate + '.');
+                    Twitter.postTweet(dailyHomesAdded + ' homes added to the MLS today, ' + twitterDate + '.');
                 });
 
 

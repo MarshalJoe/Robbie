@@ -1,4 +1,4 @@
-var Bot = require("./newBot.js")
+var Bot = require("./Bot.js")
 var schedule = require('node-schedule');
 var util = require('util');
 
@@ -14,5 +14,5 @@ var j = schedule.scheduleJob(rule, function(){
 });
 
 // Check Memory Footprint
-console.log("Memory Usage");
-console.log(util.inspect(process.memoryUsage()));
+// console.log("Memory Usage");
+// console.log(util.inspect(process.memoryUsage()));
