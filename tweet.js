@@ -23,12 +23,23 @@ module.exports = {
 			return false; 
 		}
 
+		function postTweet (content) {
+			twitter.post('statuses/update', { status: content }, function(err, data, response) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+			});
+		}
+
 		var bot = require("./bot.js")
 		var Twit = require('twit');
 		var twitInfo = require('./config.js');
 		var twitter = new Twit(twitInfo);
 		var natural = require('natural'),
 		  tokenizer = new natural.WordTokenizer();
+
+		
 
 		var stream = twitter.stream('statuses/filter', { track: '@ABoR_MLSstats' })
 
@@ -56,7 +67,7 @@ module.exports = {
 					} else if (matchRE(yesterdayRE, text)) {
 						bot.searchMLS("sold", "yesterday", asker);
 					} else {
-						this.postTweet("@" + asker + "Please include time range.")
+						postTweet("@" + asker + " please include time range [today, yesterday].")
 					}
 				} else if (matchRE(listedRE, text)) {
 					if (matchRE(todayRE, text)) {
@@ -64,10 +75,10 @@ module.exports = {
 					} else if (matchRE(yesterdayRE, text)) {
 						bot.searchMLS("listed", "yesterday", asker);
 					} else {
-						this.postTweet("@" + asker + "Please include time range.")
+						postTweet("@" + asker + " please include time range [today, yesterday].")
 					}
 				} else {
-					this.postTweet("@" + asker + "What kind of statistic would you like?");
+					postTweet("@" + asker + " what kind of housing statistic would you like [sold, listed]?");
 				}
 			} else if (matchRE(sxswRE, text)|| matchRE(SXSWRE, text)) {
 				console.log("party rec");
