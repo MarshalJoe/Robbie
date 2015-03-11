@@ -20,7 +20,7 @@ function matchRE (re, text) {
 	return false; 
 }
 
-var text = "blah blah food yeah stats sold yesterday";
+var text = "blah blah food yeah stats listed yesterday";
 
 // RegExes
 var statsRE = /^stats/;
@@ -32,38 +32,33 @@ var yesterdayRE = /^yesterday$/;
 var sxswRE = /sxsw/;
 var SXSWRE = /SXSW/;
 
-bot.searchMLS("sold", "today", asker);
-bot.searchMLS("sold", "yesterday", asker);
-bot.searchMLS("listed", "today", asker);
-bot.searchMLS("listed", "yesterday", asker);
 
-// if (matchRE(statisticsRE, text) || matchRE(statsRE, text)) {
-// 	if (matchRE(soldRE, text)) {
-// 		console.log("sold hit");
-// 		if (matchRE(todayRE, text)) {
-// 			console.log("today hit");
-// 		} else if (matchRE(yesterdayRE, text)) {
-// 			console.log("yesterday hit");
-// 		} else {
-// 			console.log("What time range?")
-// 		}
-// 	} else if (matchRE(listedRE, text)) {
-// 		console.log("listed hit");
-// 		if (matchRE(todayRE, text)) {
-// 			console.log("today hit");
-// 		} else if (matchRE(yesterdayRE, text)) {
-// 			console.log("yesterday hit");
-// 		} else {
-// 			console.log("What time range?")
-// 		}
-// 	} else {
-// 		console.log("What kind of stat would you like?");
-// 	}
-// } else if (matchRE(sxswRE, text)|| matchRE(SXSWRE, text)) {
-// 	console.log("party rec");
-// } else {
 
-// }
+if (matchRE(statisticsRE, text) || matchRE(statsRE, text)) {
+	if (matchRE(soldRE, text)) {
+		if (matchRE(todayRE, text)) {
+			bot.searchMLS("sold", "today", asker);
+		} else if (matchRE(yesterdayRE, text)) {
+			bot.searchMLS("sold", "yesterday", asker);
+		} else {
+			console.log("Please include time range.")
+		}
+	} else if (matchRE(listedRE, text)) {
+		if (matchRE(todayRE, text)) {
+			bot.searchMLS("listed", "today", asker);
+		} else if (matchRE(yesterdayRE, text)) {
+			bot.searchMLS("listed", "yesterday", asker);
+		} else {
+			console.log("Please include time range.")
+		}
+	} else {
+		console.log("What kind of statistic would you like?");
+	}
+} else if (matchRE(sxswRE, text)|| matchRE(SXSWRE, text)) {
+	console.log("party rec");
+} else {
+
+}
 
 
 

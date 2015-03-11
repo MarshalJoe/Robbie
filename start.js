@@ -1,4 +1,3 @@
-var Bot = require("./Bot.js")
 var schedule = require('node-schedule');
 var util = require('util');
 var Tweet = require('./tweet.js');
@@ -15,6 +14,6 @@ var Tweet = require('./tweet.js');
 // });
 
 // Start listening for mentions
-// Tweet.streamTweets();
+Tweet.streamTweets();
 
 console.log("Running...");

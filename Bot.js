@@ -1,5 +1,8 @@
 module.exports = {
     searchMLS: function (typeOfHouse, dateRange, asker) {
+        // include Twitter
+        var twitter = require('./tweet.js');
+
         // util number function
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -92,7 +95,7 @@ module.exports = {
                         return;
                     }
 
-                    // Iterate through search results, print out the list prices and add 'em up. 
+                    // Iterate through search results, print out the prices and add 'em up. 
                     for(var dataItem = 0; dataItem < data.length; dataItem++) {
                         var homePrice = parseInt(data[dataItem]["CurrentPrice"], 10);
                         dailyHomesTotal.push(homePrice);
@@ -103,7 +106,9 @@ module.exports = {
                     var dailyHomesSold = data.length;
 
                     // Post to Twitter
-                    console.log('@' + asker + ' ' + dailyHomesSold + ' res homes ' + houseTypeDesc + ' $' + numberWithCommas(sum) + ' ' +  twitterDate + '.');
+                    var content = '@' + asker + ' ' + dailyHomesSold + ' res homes ' + houseTypeDesc + ' $' + numberWithCommas(sum) + ' ' +  twitterDate;
+                    twitter.postTweet(content);
+                    console.log(content)
                 });
 
 

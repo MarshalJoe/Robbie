@@ -5,34 +5,76 @@ module.exports = {
 		var RealtorBot = new Twit(require('./config.js'));;
 
 		RealtorBot.post('statuses/update', { status: content }, function(err, data, response) {
-			//console.log('Message sent: ' + data.text);
+			if (err) {
+				console.log(err);
+				return;
+			}
 		});
 	},
 	streamTweets: function () {
-		var Twit = require('twit');
+		// util functions
+		function matchRE (re, text) {
+			var wordArray = tokenizer.tokenize(text);
+			for(var i=0;i < wordArray.length;i++) {
+				if (re.test(wordArray[i])) {
+					return true;
+				}
+			}
+			return false; 
+		}
 
-		var T = new Twit(require('./config.js'));;
-		var stream = T.stream('statuses/filter', { track: '@ABoR_MLSstats' })
+		var bot = require("./bot.js")
+		var Twit = require('twit');
+		var twitInfo = require('./config.js');
+		var twitter = new Twit(twitInfo);
+		var natural = require('natural'),
+		  tokenizer = new natural.WordTokenizer();
+
+		var stream = twitter.stream('statuses/filter', { track: '@ABoR_MLSstats' })
 
 		stream.on('tweet', function (tweet) {
-  			// greetings to respond to (in order to prevent spamming mentions)
-  			var greetings = ["Hi", "hi", "Hello", "hello", "Hey", "hey"];
+			var asker = tweet.user.screen_name;
+			var text = tweet.text;
 
-			for (index in greetings) {
-			    if (tweet.text.indexOf(greetings[index]) !=-1) {
-			        var content = greetings[index] + " @" + tweet.user.screen_name;
-			    	T.post('statuses/update', { status: content }, function(err, data, response) {
-						if (err) {
-							console.log(err);
-							return
-						} else {
-							console.log(data.text);
-							return
-						}	
-					});
-			    }
+			console.log(asker);
+			console.log(text);
+
+			// RegExes
+			var statsRE = /^stats/;
+			var statisticsRE = /statistics/;
+			var soldRE = /^sold$/;
+			var listedRE = /^listed$/;
+			var todayRE = /^today$/;
+			var yesterdayRE = /^yesterday$/;
+			var sxswRE = /sxsw/;
+			var SXSWRE = /SXSW/;
+
+			if (matchRE(statisticsRE, text) || matchRE(statsRE, text)) {
+				if (matchRE(soldRE, text)) {
+					if (matchRE(todayRE, text)) {
+						bot.searchMLS("sold", "today", asker);
+					} else if (matchRE(yesterdayRE, text)) {
+						bot.searchMLS("sold", "yesterday", asker);
+					} else {
+						this.postTweet("@" + asker + "Please include time range.")
+					}
+				} else if (matchRE(listedRE, text)) {
+					if (matchRE(todayRE, text)) {
+						bot.searchMLS("listed", "today", asker);
+					} else if (matchRE(yesterdayRE, text)) {
+						bot.searchMLS("listed", "yesterday", asker);
+					} else {
+						this.postTweet("@" + asker + "Please include time range.")
+					}
+				} else {
+					this.postTweet("@" + asker + "What kind of statistic would you like?");
+				}
+			} else if (matchRE(sxswRE, text)|| matchRE(SXSWRE, text)) {
+				console.log("party rec");
+			} else {
+
 			}
 
-		})
-	}
+		}) //end of stream
+	} // end of function
 } // end of export
