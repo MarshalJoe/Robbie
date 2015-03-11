@@ -6,12 +6,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node start.js",
-    "run": "forever start.js"
+    "test": "node test.js"
   },
   "author": "Joe Marshall",
   "license": "MIT",
   "dependencies": {
     "forever": "^0.13.0",
+    "natural": "^0.2.0",
     "node-schedule": "^0.1.15",
     "rets-client": "^1.1.5",
     "twit": "^1.1.19"
