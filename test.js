@@ -7,6 +7,7 @@ var natural = require('natural'),
 // app logic
 var bot = require("./bot.js")
 var twitter = require('./tweet.js');
+var asker = "JoeCharMar";
 
 // util functions
 function matchRE (re, text) {
@@ -19,23 +20,26 @@ function matchRE (re, text) {
 	return false; 
 }
 
-var text = "blah blah food yeah sxsw";
+var text = "blah blah food yeah stats sold yesterday";
 
 // RegExes
 var statsRE = /^stats/;
 var statisticsRE = /statistics/;
-var priceRE = /^price$/;
-var numberRE = /^number$/;
+var soldRE = /^sold$/;
+var listedRE = /^listed$/;
 var todayRE = /^today$/;
 var yesterdayRE = /^yesterday$/;
 var sxswRE = /sxsw/;
 var SXSWRE = /SXSW/;
 
-bot.searchMLS();
+bot.searchMLS("sold", "today", asker);
+bot.searchMLS("sold", "yesterday", asker);
+bot.searchMLS("listed", "today", asker);
+bot.searchMLS("listed", "yesterday", asker);
 
 // if (matchRE(statisticsRE, text) || matchRE(statsRE, text)) {
-// 	if (matchRE(priceRE, text)) {
-// 		console.log("price hit");
+// 	if (matchRE(soldRE, text)) {
+// 		console.log("sold hit");
 // 		if (matchRE(todayRE, text)) {
 // 			console.log("today hit");
 // 		} else if (matchRE(yesterdayRE, text)) {
@@ -43,8 +47,8 @@ bot.searchMLS();
 // 		} else {
 // 			console.log("What time range?")
 // 		}
-// 	} else if (matchRE(numberRE, text)) {
-// 		console.log("number hit");
+// 	} else if (matchRE(listedRE, text)) {
+// 		console.log("listed hit");
 // 		if (matchRE(todayRE, text)) {
 // 			console.log("today hit");
 // 		} else if (matchRE(yesterdayRE, text)) {
