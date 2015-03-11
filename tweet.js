@@ -33,8 +33,6 @@ module.exports = {
 			    }
 			}
 
-			console.log(tweet.text);
-
 		})
 	}
-}
+} // end of export

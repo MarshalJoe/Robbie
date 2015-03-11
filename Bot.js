@@ -1,11 +1,14 @@
 module.exports = {
     runBot: function () {
+        // util number function
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
         // Include Twitter module
         var Twitter = require("./tweet.js")
-
         // Include RETS credentials
         var retsKeys = require('./retsConfig.js')
-
         // Create RETS client and connect
         var client = require('rets-client').getClient(retsKeys.loginURL, retsKeys.user, retsKeys.pass);
 
@@ -76,7 +79,7 @@ module.exports = {
                     var dailyHomesSold = data.length;
 
                     // Post to Twitter
-                    Twitter.postTweet('$' + sum + ' in residential home sales today, ' + twitterDate + '.');
+                    Twitter.postTweet('$' + numberWithCommas(sum) + ' in residential home sales today, ' + twitterDate + '.');
                     Twitter.postTweet(dailyHomesSold + ' residential homes sold today, ' + twitterDate + '.');
                 });
                 
@@ -100,17 +103,17 @@ module.exports = {
                     var dailyHomesAdded = data.length;
 
                     // Post to Twitter
-                    Twitter.postTweet('$' + sum + ' in residential listings added today, ' + twitterDate + '.');
+                    Twitter.postTweet('$' + numberWithCommas(sum) + ' in residential listings added today, ' + twitterDate + '.');
                     Twitter.postTweet(dailyHomesAdded + ' homes added to the MLS today, ' + twitterDate + '.');
                 });
 
 
             });
 
-        // end of RETS connection   
-        });
-    // end of bot
-    }
+          
+        }); // end of RETS connection 
+    
+    } // end of 
 
-//end of export
-}
+
+} //end of export
