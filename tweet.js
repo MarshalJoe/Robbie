@@ -32,7 +32,7 @@ module.exports = {
 			});
 		}
 
-		var bot = require("./bot.js")
+		var bot = require("./Bot.js")
 		var Twit = require('twit');
 		var twitInfo = require('./config.js');
 		var twitter = new Twit(twitInfo);
@@ -51,14 +51,16 @@ module.exports = {
 			console.log(text);
 
 			// RegExes
+			var greetinghiRE = /^hi$/;
+			var greetingheyRE = /^hey$/;
 			var statsRE = /^stats/;
 			var statisticsRE = /statistics/;
 			var soldRE = /^sold$/;
 			var listedRE = /^listed$/;
 			var todayRE = /^today$/;
 			var yesterdayRE = /^yesterday$/;
-			var sxswRE = /sxsw/;
-			var SXSWRE = /SXSW/;
+			var weekRE = /^week$/;
+
 
 			if (matchRE(statisticsRE, text) || matchRE(statsRE, text)) {
 				if (matchRE(soldRE, text)) {
@@ -66,22 +68,26 @@ module.exports = {
 						bot.searchMLS("sold", "today", asker);
 					} else if (matchRE(yesterdayRE, text)) {
 						bot.searchMLS("sold", "yesterday", asker);
+					} else if (matchRE(weekRE, text)) {
+						bot.searchMLS("sold", "lastWeek", asker);
 					} else {
-						postTweet("@" + asker + " please include time range [today, yesterday].")
+						postTweet("@" + asker + " please include a time keyword [stats + today/yesterday/last week].")
 					}
 				} else if (matchRE(listedRE, text)) {
 					if (matchRE(todayRE, text)) {
 						bot.searchMLS("listed", "today", asker);
 					} else if (matchRE(yesterdayRE, text)) {
 						bot.searchMLS("listed", "yesterday", asker);
+					} else if (matchRE(weekRE, text)) {
+						bot.searchMLS("listed", "lastWeek", asker);
 					} else {
-						postTweet("@" + asker + " please include time range [today, yesterday].")
+						postTweet("@" + asker + " please include a time keyword [stats + today/yesterday/last week].")
 					}
 				} else {
-					postTweet("@" + asker + " what kind of housing statistic would you like [sold, listed]?");
+					postTweet("@" + asker + " what kind of housing statistics would you like [sold, listed]?");
 				}
-			} else if (matchRE(sxswRE, text)|| matchRE(SXSWRE, text)) {
-				console.log("party rec");
+			} else if (matchRE(greetinghiRE, text)|| matchRE(greetingheyRE, text)) {
+				postTweet("Hi @" + asker + " ! Ask me a question (ex: What are the stats for houses sold yesterday?)")
 			} else {
 
 			}
