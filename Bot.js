@@ -106,7 +106,7 @@ module.exports = {
                     var dailyHomesSold = data.length;
 
                     // Post to Twitter
-                    var content = '@' + asker + ' ' + dailyHomesSold + ' res homes ' + houseTypeDesc + ' $' + numberWithCommas(sum) + ' ' +  twitterDate;
+                    var content = '.@' + asker + ' ' + dailyHomesSold + ' res homes ' + houseTypeDesc + ' $' + numberWithCommas(sum) + ' ' +  twitterDate;
                     twitter.postTweet(content);
                     console.log(content)
                 });

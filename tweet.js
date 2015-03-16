@@ -1,8 +1,22 @@
 module.exports = {
+	showLimit: function () {
+		var Twit = require('twit');
+
+		var RealtorBot = new Twit(require('./config.js'));
+
+		RealtorBot.get('application/rate_limit_status', function (err, data, response) {
+			if (err) {
+				console.log(err);
+				return;
+			}
+
+			console.log(data.resources);
+		});
+	},
 	postTweet: function (content) {
 		var Twit = require('twit');
 
-		var RealtorBot = new Twit(require('./config.js'));;
+		var RealtorBot = new Twit(require('./config.js'));
 
 		RealtorBot.post('statuses/update', { status: content }, function(err, data, response) {
 			if (err) {
@@ -41,7 +55,7 @@ module.exports = {
 
 		
 
-		var stream = twitter.stream('statuses/filter', { track: '@ABoR_MLSstats' })
+		var stream = twitter.stream('statuses/filter', { track: '@ABoR_MLS' })
 
 		stream.on('tweet', function (tweet) {
 			var asker = tweet.user.screen_name;
@@ -51,8 +65,12 @@ module.exports = {
 			console.log(text);
 
 			// RegExes
+			var greetingHiRE = /^Hi$/;
 			var greetinghiRE = /^hi$/;
+			var greetingHeyRE = /^Hey$/;
 			var greetingheyRE = /^hey$/;
+			var greetingHelloRE = /^Hello$/;
+			var greetinghelloRE = /^hello$/;
 			var statsRE = /^stats/;
 			var statisticsRE = /statistics/;
 			var soldRE = /^sold$/;
@@ -86,7 +104,7 @@ module.exports = {
 				} else {
 					postTweet("@" + asker + " what kind of housing statistics would you like [sold, listed]?");
 				}
-			} else if (matchRE(greetinghiRE, text)|| matchRE(greetingheyRE, text)) {
+			} else if (matchRE(greetinghiRE, text)|| matchRE(greetingheyRE, text) || matchRE(greetingHiRE, text) || matchRE(greetingHeyRE, text) || matchRE(greetingHelloRE, text) || matchRE(greetinghelloRE, text)) {
 				postTweet("Hi @" + asker + " ! Ask me a question (ex: What are the stats for houses sold yesterday?)")
 			} else {
 
